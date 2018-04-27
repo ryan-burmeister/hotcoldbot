@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math"
 	"os/exec"
 )
 
@@ -31,10 +32,10 @@ type position struct {
 // position.distanceTo computes the
 // distance between two points using
 // Pathagoras' Theorem.
-func (p position) distanceTo(p2 position) float32 {
+func (p position) distanceTo(p2 position) float64 {
 	xDist := p.x - p2.x
 	yDist := p.y - p2.y
-	return math.sqrt(math.pow(xDist) + math.pow(yDist))
+	return math.Sqrt(math.Pow(float64(xDist), 2) + math.Pow(float64(yDist), 2))
 }
 
 // clearScreen runs the "clear" command and
@@ -52,5 +53,6 @@ func main() {
 	// Create a new board with dots so it's
 	// easy to see the differences between the
 	// background and other symbols
-	b := newBoard('.')
+	board := newBoard('.')
+	board.draw()
 }

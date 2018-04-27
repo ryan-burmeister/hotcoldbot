@@ -62,7 +62,7 @@ func (c *character) move(d direction) {
 		c.pos.y = c.bounds.bottom
 	} else if c.pos.x < c.bounds.left {
 		c.pos.x = c.bounds.left
-	} else if c.pos.x > c.bounds.y {
+	} else if c.pos.x > c.bounds.right {
 		c.pos.x = c.bounds.right
 	}
 }
