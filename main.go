@@ -14,7 +14,7 @@ const (
 	// The maximum number of steps to allow the
 	// character to move before starting a new
 	// round.
-	steps = 40
+	maxSteps = 40
 
 	// The time to wait in-between each step
 	// the character moves.
@@ -26,6 +26,15 @@ const (
 type position struct {
 	x int
 	y int
+}
+
+// position.distanceTo computes the
+// distance between two points using
+// Pathagoras' Theorem.
+func (p position) distanceTo(p2 position) float32 {
+	xDist := p.x - p2.x
+	yDist := p.y - p2.y
+	return math.sqrt(math.pow(xDist) + math.pow(yDist))
 }
 
 // clearScreen runs the "clear" command and
