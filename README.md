@@ -4,7 +4,7 @@ A bot that learns how to reach a goal by learning from its past mistakes.
 
 # Getting It Running
 
-This was built using Golang 1.9.5. Simple clone the repo and run <code>go build</code> within the directory.
+This was built using Golang 1.9.5. Simply clone the repo, run <code>go build</code> within the directory, and run the binary that gets created with <code>./hotcoldbot</code> (for Unix systems).
 
 ## Windows Users
 
