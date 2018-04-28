@@ -26,7 +26,7 @@ func (b *board) clear(r rune) {
 
 // board.placeCell will change the value of
 // the rune at position row, col.
-func (b *board) placeCell(row, col int, r rune) {
+func (b *board) setRune(row, col int, r rune) {
 	b[row][col] = r
 }
 
