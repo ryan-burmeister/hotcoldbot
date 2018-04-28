@@ -10,9 +10,18 @@ import (
 )
 
 const (
+	// The x and y positions the character starts
+	// at.
+	startX = 0
+	startY = 0
+
 	// The width and height of the board.
 	width  = 20
 	height = 10
+
+	// The x and y positions the goal starts at.
+	goalX = width - 1
+	goalY = height - 1
 
 	// The maximum number of steps to allow the
 	// character to move before starting a new
@@ -88,7 +97,7 @@ func main() {
 
 	// Create character and goal
 	c := newCharacter()
-	g := position{width - 1, height - 1}
+	g := position{goalX, goalY}
 
 	// Counters
 	round := 1
@@ -97,8 +106,8 @@ func main() {
 		var prevPositions []position
 
 		// Reset
-		c.pos.x = 0
-		c.pos.y = 0
+		c.pos.x = startX
+		c.pos.y = startY
 		c.unmarkSteps()
 
 		// Show first position and tick
@@ -114,7 +123,7 @@ func main() {
 			// Mark the step for change if the last
 			// position was closer than the current
 			// one
-			lastPos := position{0, 0}
+			lastPos := position{startX, startY}
 			if i >= 1 {
 				lastPos = prevPositions[i-1]
 			}
