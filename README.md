@@ -8,7 +8,7 @@ This was built using Golang 1.9.5. Simple clone the repo and run <code>go build<
 
 ## Windows Users
 
-If running on windows, you must change the "clear" command in main.go to "cls" before building.
+If running on windows, you must change the <code>"clear"</code> command in main.go to <code>"cls"</code> before building.
 
 # How It Works
 
