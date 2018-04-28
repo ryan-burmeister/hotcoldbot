@@ -11,6 +11,7 @@ const (
 	DIRECTION_DOWN
 	DIRECTION_LEFT
 	DIRECTION_RIGHT
+	DIRECTION_NONE
 )
 
 // bounds represents the boundaries a
@@ -99,16 +100,22 @@ func (c *character) unmarkSteps() {
 // each one if it thinks it's neccessary.
 func (c *character) learn() {
 	for i, _ := range c.steps {
-		if c.steps[i].marked && len(c.steps[i].unusedDirs) > 0 {
+		if c.steps[i].marked {
 			// Unmark this step
 			c.steps[i].marked = false
 
-			// Pick a random new direction and apply
-			// then delete it from the unusedDirs slice
-			unused := c.steps[i].unusedDirs
-			num := rand.Intn(len(c.steps[i].unusedDirs))
-			c.steps[i].dir = c.steps[i].unusedDirs[num]
-			c.steps[i].unusedDirs = append(unused[:num], unused[num+1:]...)
+			if len(c.steps[i].unusedDirs) > 0 {
+				// Pick a random new direction and apply
+				// then delete it from the unusedDirs slice
+				unused := c.steps[i].unusedDirs
+				num := rand.Intn(len(c.steps[i].unusedDirs))
+				c.steps[i].dir = c.steps[i].unusedDirs[num]
+				c.steps[i].unusedDirs = append(unused[:num], unused[num+1:]...)
+			} else {
+				// Don't move at all after all other
+				// directions have been used
+				c.steps[i].dir = DIRECTION_NONE
+			}
 		}
 	}
 }
@@ -129,25 +136,19 @@ func (c *character) move(i int) {
 		c.pos.x += 1
 	}
 
-	// Stay within bounds
-	var outOfBounds bool
+	// Stay within bounds and mark for change
+	// if position is out of bounds
 	if c.pos.y < c.bounds.top {
 		c.pos.y = c.bounds.top
-		outOfBounds = true
+		c.steps[i].marked = true
 	} else if c.pos.y > c.bounds.bottom {
 		c.pos.y = c.bounds.bottom
-		outOfBounds = true
+		c.steps[i].marked = true
 	} else if c.pos.x < c.bounds.left {
 		c.pos.x = c.bounds.left
-		outOfBounds = true
+		c.steps[i].marked = true
 	} else if c.pos.x > c.bounds.right {
 		c.pos.x = c.bounds.right
-		outOfBounds = true
-	}
-
-	// Mark step for change if it's out of
-	// bounds
-	if outOfBounds {
 		c.steps[i].marked = true
 	}
 }
