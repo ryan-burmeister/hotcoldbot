@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math"
+	"math/rand"
 	"os/exec"
 	"time"
 )
@@ -77,6 +78,9 @@ func drawInformation(round, steps int, distance float64) {
 }
 
 func main() {
+	// Set seed
+	rand.Seed(time.Now().Unix())
+
 	// Create a new board with dots so it's
 	// easy to see the differences between the
 	// background and other symbols
